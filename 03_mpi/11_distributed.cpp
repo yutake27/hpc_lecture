@@ -47,6 +47,7 @@ int main(int argc, char** argv) {
         }
       }
     }
+    MPI_Win_free(&win);
   }
   for(int irank=0; irank<size; irank++) {
     MPI_Barrier(MPI_COMM_WORLD);
