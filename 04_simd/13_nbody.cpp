@@ -27,9 +27,9 @@ int main() {
   for(int i=0; i<N; i++) {
     /*for(int j=0; j<N; j++) {
       if(i != j) {
-        double rx = x[i] - x[j];
-        double ry = y[i] - y[j];
-        double r = std::sqrt(rx * rx + ry * ry);
+        float rx = x[i] - x[j];
+        float ry = y[i] - y[j];
+        float r = std::sqrt(rx * rx + ry * ry);
         fx[i] -= rx * m[j] / (r * r * r);
         fy[i] -= ry * m[j] / (r * r * r);
       }
