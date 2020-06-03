@@ -37,8 +37,6 @@ namespace gemm {
 
     //// Used by GEMM to compute the final result C <= alpha * accumulator + beta * C
     template <
-        typename accum_t,
-        typename output_t,
         typename scalar_t
     >
     class blas_scaled_epilogue
@@ -60,22 +58,22 @@ namespace gemm {
 
         /// Epilogue operator
         inline __device__ __host__
-        output_t operator()(
-            accum_t accumulator,
-            output_t c,
+        scalar_t operator()(
+            scalar_t accumulator,
+            scalar_t c,
             size_t idx) const
         {
-            return output_t(alpha * scalar_t(accumulator) + beta * scalar_t(c));
+            return alpha * accumulator + beta * c;
         }
 
 
         /// Epilogue operator
         inline __device__ __host__
-        output_t operator()(
-            accum_t accumulator,
+        scalar_t operator()(
+            scalar_t accumulator,
             size_t idx) const
         {
-            return output_t(alpha * scalar_t(accumulator));
+            return alpha * accumulator;
         }
 
         /**
