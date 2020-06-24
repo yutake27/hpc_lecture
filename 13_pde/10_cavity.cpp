@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <chrono>
 
 using namespace std;
 typedef vector<vector<float> > matrix;
@@ -43,7 +44,6 @@ void save_matrix(matrix &u, matrix &v, matrix &p, int nx, int ny) {
 }
 
 void build_up_b(matrix &b, float rho, float dt, matrix &u, matrix &v, float dx, float dy, int nx, int ny) {
-    matrix bn(nx, vector<float>(ny));
     for (int i=1; i<nx-1; i++){
         for (int j=1; j<ny-1; j++){
             b[i][j] = (rho * (1 / dt *
@@ -144,9 +144,7 @@ void cavity_flow(int nt, matrix &u, matrix &v, float dt, float dx, float dy, mat
 int main() {
     const int nx = 41;
     const int ny = 41;
-    const int nt = 500;
     const int nit = 50;
-    const int c = 1;
     const float dx = 2.0 / (nx - 1);
     const float dy = 2.0 / (ny - 1);
 
@@ -158,7 +156,11 @@ int main() {
     matrix v(nx, vector<float>(ny));
     matrix p(nx, vector<float>(ny));
     matrix b(nx, vector<float>(ny));
+    auto tic = chrono::steady_clock::now();
     cavity_flow(100, u, v, dt, dx, dy, p, rho, nu, nx, ny, nit);
+    auto toc = chrono::steady_clock::now();
+    double time = chrono::duration<double>(toc-tic).count();
+    cout << time << endl;
     save_matrix(u, v, p, nx, ny);
     return 0;
 }
