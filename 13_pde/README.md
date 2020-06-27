@@ -2,7 +2,7 @@
 
 1. implement in **c++**
 
-   ```python
+   ```bash
    g++ 10_cavity.cpp
    ./a.out
    ```
