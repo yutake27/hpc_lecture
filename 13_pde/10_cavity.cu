@@ -7,7 +7,7 @@ const int nx = 41;
 const int ny = 41;
 const int size = nx * ny * sizeof(float);
 const int N = 1024;
-const dim3 grid((nx+N-1)/N, ny);
+const dim3 grid((ny+N-1)/N, nx);
 
 
 void save_matrix(float *u, float *v, float *p) {
